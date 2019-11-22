@@ -12,6 +12,6 @@ docker-files
 ## Runtime
 - .NETCore
 
-### LICENS 
+### LICENSE
 [PUBLIC DOMAIN](./LICENSE)
 

@@ -1,0 +1,44 @@
+version: '3'
+services:
+  # ---- proxy
+  proxy:
+    build: ./nginx
+    command: ["nginx", "-g", "daemon off;"]
+    container_name: proxy
+    depends_on:
+      - app
+    environment:
+      - TZ=Asia/Tokyo
+    ports:
+      - 8080:80
+    volumes:
+      - www-data:/var/www/html
+
+  # ---- app
+  app:
+    build: ./php-fpm74
+    container_name: app
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - www-data:/var/www/html
+  
+  # ---- db
+  db:
+    build: ./mysql
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: Paswd1234#
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/data/mysql
+
+volumes:
+  dbdata:
+  www-data:
+    driver_opts:
+      type: none
+      device: /home/vagrant/data/src
+      o: bind
