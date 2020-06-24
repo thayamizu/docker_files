@@ -40,5 +40,5 @@ volumes:
   www-data:
     driver_opts:
       type: none
-      device: /home/vagrant/data/src
+      device: /Users/t_hayamizu/Workspaces/repositories/docker_files/php/data/src
       o: bind
