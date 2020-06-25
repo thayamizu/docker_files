@@ -11,17 +11,15 @@ services:
       - TZ=Asia/Tokyo
     ports:
       - 8080:80
-    volumes:
-      - www-data:/var/www/html
 
   # ---- app
   app:
-    build: ./php-fpm74
+    build: 
+      context: ../ 
+      dockerfile: php/php-fpm74/Dockerfile
     container_name: app
     environment:
       - TZ=Asia/Tokyo
-    volumes:
-      - www-data:/var/www/html
   
   # ---- db
   db:
@@ -37,8 +35,3 @@ services:
 
 volumes:
   dbdata:
-  www-data:
-    driver_opts:
-      type: none
-      device: /Users/t_hayamizu/Workspaces/repositories/docker_files/php/data/src
-      o: bind
