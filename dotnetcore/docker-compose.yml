@@ -10,20 +10,16 @@ services:
     environment:
       - TZ=Asia/Tokyo
     ports:
-      - 8081:80
-    volumes:
-      - www-data:/var/www/html
+      - 8080:80
 
   # ---- app
   app:
     image: mcr.microsoft.com/dotnet/core/samples:aspnetapp
     container_name: app
     ports:
-      - 8080:80
+      - 9000:80
     environment:
       - TZ=Asia/Tokyo
-    volumes:
-      - www-data:/var/www/html
   
   # ---- db
   db:
@@ -39,8 +35,3 @@ services:
 
 volumes:
   dbdata:
-  www-data:
-    driver_opts:
-      type: none
-      device: ../bin
-      o: bind
