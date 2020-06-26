@@ -1,0 +1,37 @@
+version: '3'
+services:
+  # ---- proxy
+  proxy:
+    build: ./nginx
+    command: ["nginx", "-g", "daemon off;"]
+    container_name: proxy
+    depends_on:
+      - app
+    environment:
+      - TZ=Asia/Tokyo
+    ports:
+      - 8080:80
+
+  # ---- app
+  app:
+    build: 
+      context: ../ 
+      dockerfile: php/php-fpm74/Dockerfile
+    container_name: app
+    environment:
+      - TZ=Asia/Tokyo
+  
+  # ---- db
+  db:
+    build: ./mysql
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: Paswd1234#
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/data/mysql
+
+volumes:
+  dbdata:
