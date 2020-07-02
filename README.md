@@ -1,16 +1,21 @@
 docker-files
 =====
-- my docker files.
+- docker-compose.
 
-## Web Server
+## PHP
 - Nginx
-
-## Database
 - MySQL
-- MariaDB
+- PHPFPM
 
-## Runtime
-- .NETCore
+## NodeJS
+- MySQL
+- Nginx
+- NodeJS
+
+## OpenJDK
+- OpenJDK
+- Nginx
+- MySQL
 
 ### LICENSE
 [PUBLIC DOMAIN](./LICENSE)
