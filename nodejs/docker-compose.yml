@@ -4,32 +4,35 @@ services:
   proxy:
     build: ./nginx
     command: ["nginx", "-g", "daemon off;"]
-    container_name: proxy
+    container_name: node-proxy
     depends_on:
       - app
-    environment:
-      - TZ=Asia/Tokyo
+    env_file:
+      - ./base.env
     ports:
-      - 8080:80
+      - 8081:80
 
   # ---- app
   app:
-    build: 
-      context: ../ 
-      dockerfile: php/php-fpm74/Dockerfile
-    container_name: app
-    environment:
-      - TZ=Asia/Tokyo
-  
+    build: ./nodejs
+    container_name: node-app
+    command: ["pm2-runtime", "/var/www/html/app.js"]
+    depends_on:
+      - db
+    env_file:
+      - ./base.env
+    expose:
+      - 8080
+
   # ---- db
   db:
     build: ./mysql
-    container_name: db
-    environment:
-      MYSQL_ROOT_PASSWORD: Paswd1234#
-      TZ: 'Asia/Tokyo'
-    ports:
-      - 3306:3306
+    container_name: node-db
+    env_file:
+      - ./base.env
+      - ./mysql/mysql.env
+    expose:
+      - 3306
     volumes:
       - dbdata:/data/mysql
 

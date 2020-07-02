@@ -1,17 +1,7 @@
-FROM php:7.4-fpm
+FROM node:14.5.0-alpine
 
-## -- Update package.
-RUN apt-get update
-
-## -- install component
-RUN apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev 
-
-## -- install docker-php-ext 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-        && docker-php-ext-install -j$(nproc) gd
+## -- install pm2
+RUN npm install pm2 -g
 
 ## -- copy src
-COPY ./php/src /var/www/html
+COPY ./bin /var/www/html
