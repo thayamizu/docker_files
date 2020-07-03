@@ -1,3 +1,3 @@
-FROM openjdk:11.0.1-jdk
+FROM openjdk:14-jdk-alpine
 
 ADD ./bin/app.jar /var/www/
