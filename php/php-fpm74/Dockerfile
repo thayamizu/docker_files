@@ -14,4 +14,4 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         && docker-php-ext-install -j$(nproc) gd
 
 ## -- copy src
-COPY ./php/src /var/www/html
+COPY ./src /var/www/html
